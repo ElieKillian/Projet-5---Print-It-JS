@@ -17,16 +17,38 @@ const slides = [
 	}
 ]
 
+/* Mouvement des flèches */
+
 const moveleft = document.querySelector(".arrow_left");
 moveleft.addEventListener('click', function(event){
-	console.log('ça marche !')
+	console.log('flèche gauche ok !')
 });
 
 const moveright = document.querySelector(".arrow_right");
 moveright.addEventListener('click', function(event){
-	console.log('bien!')
+	console.log('flèche droite ok !')
 });
 
-//const banner = document.querySelector("#banner");
-//banner.appendChild(moveleft);
-//banner.appendChild(moveright);
+/* Génération des points de la bannière*/
+
+function createbulletpoints(slides){
+	for (let i=0; i < slides.length; i++){
+		const bulletpoint = document.createElement("div");
+		bulletpoint.className = "dot";
+
+		const groupbulletpoints = document.querySelector(".dots");
+		groupbulletpoints.appendChild(bulletpoint);
+
+		console.log('fonction ok!')
+	}
+
+	const selectbullet = document.querySelector(".dot");
+	const classes = selectbullet.classList;
+	classes.add("dot_selected");
+};
+
+createbulletpoints(slides);
+
+
+
+

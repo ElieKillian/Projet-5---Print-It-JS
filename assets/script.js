@@ -1,33 +1,53 @@
 const slides = [
 	{
-		"image":"slide1.jpg",
-		"tagLine":"Impressions tous formats <span>en boutique et en ligne</span>"
+		"image": document.getElementsByClassName("banner-img")[0].src,
+		"tagLine": document.getElementsByClassName("banner-text")[0].innerHTML,
 	},
 	{
-		"image":"slide2.jpg",
+		"image":"assets/images/slideshow/slide2.jpg",
 		"tagLine":"Tirages haute définition grand format <span>pour vos bureaux et events</span>"
 	},
 	{
-		"image":"slide3.jpg",
+		"image":"assets/images/slideshow/slide3.jpg",
 		"tagLine":"Grand choix de couleurs <span>de CMJN aux pantones</span>"
 	},
 	{
-		"image":"slide4.png",
+		"image":"assets/images/slideshow/slide4.png",
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
 
-/* Mouvement des flèches */
+const imgSlide = document.getElementsByClassName("banner-img")[0];
+const txtSlide = document.getElementsByClassName("banner-text")[0];
 
-const moveleft = document.querySelector(".arrow_left");
-moveleft.addEventListener('click', function(event){
-	console.log('flèche gauche ok !')
-});
+function updateSlide(i){
+	imgSlide.src = slides[i].image;
+	txtSlide.innerHTML = slides[i].tagLine;
+	console.log(slides[i]);
+}
+
+updateSlide(0);
+
+/* Mouvement des flèches */
+let currentSlide = 0;
 
 const moveright = document.querySelector(".arrow_right");
-moveright.addEventListener('click', function(event){
-	console.log('flèche droite ok !')
+moveright.addEventListener('click', function(){
+	console.log('flèche droite ok !');
+	currentSlide = (currentSlide + 1) % slides.length;
+	updateSlide(currentSlide);
+	selectedbulletpoints(currentSlide);
 });
+
+const moveleft = document.querySelector(".arrow_left");
+moveleft.addEventListener('click', function(){
+	console.log('flèche gauche ok !')
+	currentSlide = currentSlide - 1 < 0 ? slides.length - 1 : currentSlide -1;
+	updateSlide(currentSlide);
+	selectedbulletpoints(currentSlide);
+});
+
+
 
 /* Génération des points de la bannière*/
 
@@ -39,16 +59,25 @@ function createbulletpoints(slides){
 		const groupbulletpoints = document.querySelector(".dots");
 		groupbulletpoints.appendChild(bulletpoint);
 
-		console.log('fonction ok!')
-	}
+		selectedbulletpoints(0)
+	}};
 
-	const selectbullet = document.querySelector(".dot");
-	const classes = selectbullet.classList;
+function selectedbulletpoints(slidesNumber){
+	const bullets = document.querySelectorAll(".dot");
+	const currentSelectedBullet = bullets[slidesNumber -1 < 0 ? bullets.length - 1 : currentSlide -1];
+	console.log("currentSelectedBullet : ", currentSelectedBullet); //previous
+
+	const currentBulletclasses = currentSelectedBullet.classList;
+	console.log("currentBulletclasses :", currentBulletclasses);
+	currentBulletclasses.remove("dot_selected");
+
+	const selectedbullet = bullets[slidesNumber];
+	const classes = selectedbullet.classList;
 	classes.add("dot_selected");
+
 };
 
 createbulletpoints(slides);
-
 
 
 

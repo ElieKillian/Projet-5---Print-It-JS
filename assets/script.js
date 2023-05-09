@@ -23,7 +23,6 @@ const txtSlide = document.getElementsByClassName("banner-text")[0];
 function updateSlide(i){
 	imgSlide.src = slides[i].image;
 	txtSlide.innerHTML = slides[i].tagLine;
-	console.log(slides[i]);
 }
 
 updateSlide(0);
@@ -64,17 +63,18 @@ function createbulletpoints(slides){
 
 function selectedbulletpoints(slidesNumber){
 	const bullets = document.querySelectorAll(".dot");
-	const currentSelectedBullet = bullets[slidesNumber -1 < 0 ? bullets.length - 1 : currentSlide -1];
-	console.log("currentSelectedBullet : ", currentSelectedBullet); //previous
 
-	const currentBulletclasses = currentSelectedBullet.classList;
-	console.log("currentBulletclasses :", currentBulletclasses);
-	currentBulletclasses.remove("dot_selected");
+	const previousSelectedBullet = bullets[slidesNumber -1 < 0 ? bullets.length - 1 : currentSlide -1];
+	const previousBulletclasses = previousSelectedBullet.classList;
+	previousBulletclasses.remove("dot_selected");
+
+	const nextSelectedBullet = bullets[(slidesNumber +1) % bullets.length];
+	const nextBulletclasses = nextSelectedBullet.classList;
+	nextBulletclasses.remove("dot_selected");
 
 	const selectedbullet = bullets[slidesNumber];
 	const classes = selectedbullet.classList;
 	classes.add("dot_selected");
-
 };
 
 createbulletpoints(slides);

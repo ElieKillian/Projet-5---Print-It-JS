@@ -30,38 +30,38 @@ updateSlide(0);
 /* Mouvement des flèches */
 let currentSlide = 0;
 
-const moveright = document.querySelector(".arrow_right");
-moveright.addEventListener('click', function(){
+const moveRight = document.querySelector(".arrow_right");
+moveRight.addEventListener('click', function(){
 	console.log('flèche droite ok !');
 	currentSlide = (currentSlide + 1) % slides.length;
 	updateSlide(currentSlide);
-	selectedbulletpoints(currentSlide);
+	selectedBulletPoints(currentSlide);
 });
 
-const moveleft = document.querySelector(".arrow_left");
-moveleft.addEventListener('click', function(){
+const moveLeft = document.querySelector(".arrow_left");
+moveLeft.addEventListener('click', function(){
 	console.log('flèche gauche ok !')
 	currentSlide = currentSlide - 1 < 0 ? slides.length - 1 : currentSlide -1;
 	updateSlide(currentSlide);
-	selectedbulletpoints(currentSlide);
+	selectedBulletPoints(currentSlide);
 });
 
 
 
 /* Génération des points de la bannière*/
 
-function createbulletpoints(slides){
+function createBulletPoints(slides){
 	for (let i=0; i < slides.length; i++){
-		const bulletpoint = document.createElement("div");
-		bulletpoint.className = "dot";
+		const bulletPoint = document.createElement("div");
+		bulletPoint.className = "dot";
 
-		const groupbulletpoints = document.querySelector(".dots");
-		groupbulletpoints.appendChild(bulletpoint);
+		const groupBulletPoints = document.querySelector(".dots");
+		groupBulletPoints.appendChild(bulletPoint);
 
-		selectedbulletpoints(0)
+		selectedBulletPoints(0)
 	}};
 
-function selectedbulletpoints(slidesNumber){
+function selectedBulletPoints(slidesNumber){
 	const bullets = document.querySelectorAll(".dot");
 
 	const previousSelectedBullet = bullets[slidesNumber -1 < 0 ? bullets.length - 1 : currentSlide -1];
@@ -72,12 +72,12 @@ function selectedbulletpoints(slidesNumber){
 	const nextBulletclasses = nextSelectedBullet.classList;
 	nextBulletclasses.remove("dot_selected");
 
-	const selectedbullet = bullets[slidesNumber];
-	const classes = selectedbullet.classList;
+	const selectedBullet = bullets[slidesNumber];
+	const classes = selectedBullet.classList;
 	classes.add("dot_selected");
 };
 
-createbulletpoints(slides);
+createBulletPoints(slides);
 
 
 
